@@ -1,10 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Blog from '../models/blog.js'
 
-// @desc   Register New User
-// @Route  POST /api/users
-// @access Public
-
 // Create Blog
 const createBlog = asyncHandler(async (req, res) => {
   const { title, content, creationDate, tags } = req.body

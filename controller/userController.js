@@ -2,9 +2,7 @@ import asyncHandler from 'express-async-handler'
 import User from '../models/user.js'
 import generateToken from '../config/generateToken.js'
 
-// @desc   Register New User
-// @Route  POST /api/users
-// @access Public
+// Create User
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password, date } = req.body
 
@@ -29,9 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc   Auth USER & and get TOKEN
-// @Route  POST /api/users/login
-// @access Public
+// User Authentication
 const authUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body
 

@@ -1,10 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Comment from '../models/comment.js'
 
-// @desc   Register New User
-// @Route  POST /api/users
-// @access Public
-
 // Create Comment
 const createComment = asyncHandler(async (req, res) => {
   const { text, creationDate, blog } = req.body
