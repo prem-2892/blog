@@ -9,6 +9,8 @@ import { notFound, errorHandler } from './middleware/error.js'
 
 // routes
 import userRoutes from './routes/userRoutes.js'
+import blogRoutes from './routes/blogRoutes.js'
+import commentRoutes from './routes/commentRoutes.js'
 
 dotenv.config()
 
@@ -24,6 +26,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/users', userRoutes)
+app.use('/blogs', blogRoutes)
+app.use('/comments', commentRoutes)
 
 // for handling all 404 ERRORS
 app.use(notFound)

@@ -1,5 +1,3 @@
-import mongoose from 'mongoose'
-import bcrypt from 'bcryptjs'
 import asyncHandler from 'express-async-handler'
 import User from '../models/user.js'
 import generateToken from '../config/generateToken.js'
