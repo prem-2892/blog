@@ -4,15 +4,15 @@ import { protect } from '../middleware/auth.js'
 import {
   createComment,
   deleteComment,
-  getCommentById,
+  getCommentByBlog,
   updateComment,
 } from '../controller/commentController.js'
 
 const router = express.Router()
 
 router.route('/new').post(protect, createComment)
-router.route('/:id').get(getCommentById)
-router.route('/update-comment/:id').put(updateComment)
-router.route('/delete-comment/:id').delete(protect, deleteComment)
+router.route('/:id').get(getCommentByBlog)
+router.route('/update/:id').put(protect, updateComment)
+router.route('/delete/:id').delete(protect, deleteComment)
 
 export default router

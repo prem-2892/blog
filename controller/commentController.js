@@ -23,8 +23,8 @@ const createComment = asyncHandler(async (req, res) => {
 })
 
 // Read Comment
-const getCommentById = asyncHandler(async (req, res) => {
-  const comment = await Comment.findById(req.params.id)
+const getCommentByBlog = asyncHandler(async (req, res) => {
+  const comment = await Comment.find({ blog: req.params.id })
     .populate('user', 'username')
     .populate('blog', 'title')
   res.json(comment)
@@ -34,18 +34,15 @@ const getCommentById = asyncHandler(async (req, res) => {
 const updateComment = asyncHandler(async (req, res) => {
   const comment = await Comment.findById(req.params.id)
 
-  //   if (!comment) {
-  //     res.status(404)
-  //     throw new Error('Comment not found')
-  //   }
+  if (!comment) {
+    res.status(404)
+    throw new Error('Comment not found')
+  }
 
-  //   console.log(comment.user)
-  //   console.log(req.user.id)
-
-  //   if (comment.user != req.user.id) {
-  //     res.status(401)
-  //     throw new Error('Not authorized to update this comment')
-  //   }
+  if (comment.user != req.user.id) {
+    res.status(401)
+    throw new Error('Not authorized to update this comment')
+  }
 
   const updatedComment = {
     user: req.body.user || comment.user,
@@ -85,4 +82,4 @@ const deleteComment = asyncHandler(async (req, res) => {
   res.json({ message: 'Comment successfully deleted' })
 })
 
-export { createComment, getCommentById, updateComment, deleteComment }
+export { createComment, getCommentByBlog, updateComment, deleteComment }

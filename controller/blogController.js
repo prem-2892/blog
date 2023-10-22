@@ -40,8 +40,6 @@ const getBlogById = asyncHandler(async (req, res) => {
 // Update Blog
 const updateBlog = asyncHandler(async (req, res) => {
   const blog = await Blog.findById(req.params.id)
-  console.log(blog.author)
-  console.log(req.user.id)
 
   if (!blog) {
     res.status(404)
@@ -66,7 +64,7 @@ const updateBlog = asyncHandler(async (req, res) => {
   }
 
   const newBlog = await Blog.findByIdAndUpdate(req.params.id, updatedBlog)
-  res.json({ message: 'Blog successfully updated' }, newBlog)
+  res.json(newBlog)
 })
 
 // Delete Blog
@@ -95,7 +93,7 @@ const deleteBlog = asyncHandler(async (req, res) => {
 
 // Show All Blogs
 const getBlogs = asyncHandler(async (req, res) => {
-  const blogs = await Blog.find()
+  const blogs = await Blog.find({})
 
   res.json(blogs)
 })
