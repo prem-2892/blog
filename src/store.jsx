@@ -1,11 +1,13 @@
 import { combineReducers, applyMiddleware } from 'redux'
-import { configureStore } from '@reduxjs/toolkit'
+import { createStore } from '@reduxjs/toolkit'
 import { composeWithDevTools } from '@redux-devtools/extension'
 import thunk from 'redux-thunk'
 import { userLoginReducer } from './redux/reducer/userReducers'
+import { blogListReducer } from './redux/reducer/blogReducer'
 
 const reducer = combineReducers({
   user: userLoginReducer,
+  blogList: blogListReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -15,12 +17,12 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 const initialState = {
   user: { userInfo: userInfoFromStorage },
 }
-console.log(userInfoFromStorage)
+
 const middleware = [thunk]
 
-const store = configureStore(
-  { reducer: reducer },
-  { preloadedState: initialState },
+const store = createStore(
+  reducer,
+  initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 )
 
