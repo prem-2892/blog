@@ -7,6 +7,8 @@ import {
   userRegisterReducer,
 } from './redux/reducer/userReducers'
 import {
+  blogDeleteReducer,
+  blogEditReducer,
   blogItemReducer,
   blogListReducer,
   userBlogReducer,
@@ -18,6 +20,8 @@ const reducer = combineReducers({
   blogList: blogListReducer,
   blogItem: blogItemReducer,
   blogUser: userBlogReducer,
+  blogDelete: blogDeleteReducer,
+  blogEdit: blogEditReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

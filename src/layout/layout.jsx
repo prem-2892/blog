@@ -6,6 +6,7 @@ import Signup from '../pages/Signup'
 import Blog from '../pages/Blog'
 import CreateBlog from '../pages/CreateBlog'
 import MyBlogs from '../pages/MyBlogs'
+import EditBlog from '../pages/EditBlog'
 
 const Layout = () => {
   return (
@@ -18,6 +19,7 @@ const Layout = () => {
         <Route path='/blog/create' element={<CreateBlog />} />
         <Route path='/blogs/my' element={<MyBlogs />} />
         <Route path='/blogs/:id' element={<Blog />} />
+        <Route path='/blogs/edit/:id' element={<EditBlog />} />
       </Routes>
     </>
   )

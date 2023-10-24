@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listUserBlogs } from '../redux/action/blogAction'
+import { deleteBlog, listUserBlogs } from '../redux/action/blogAction'
+import { useNavigate } from 'react-router-dom'
 
 const MyBlogs = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const blogUser = useSelector((state) => state.blogUser)
   const { userBlogs } = blogUser
@@ -13,6 +15,13 @@ const MyBlogs = () => {
       dispatch(listUserBlogs())
     }
   }, [dispatch, userBlogs])
+
+  const handleDelete = (e, id) => {
+    e.preventDefault()
+
+    dispatch(deleteBlog(id))
+    dispatch(listUserBlogs())
+  }
 
   return (
     <div>
@@ -29,13 +38,13 @@ const MyBlogs = () => {
               <div className='flex gap-3'>
                 <button
                   className='bg-blue-300 px-3 py-1 mt-3  rounded-md cursor-pointer'
-                  onClick={(e) => navigate(`/blogs/${blog._id}`)}
+                  onClick={(e) => navigate(`/blogs/edit/${blog._id}`)}
                 >
                   Edit
                 </button>
                 <button
                   className='bg-red-300 px-3 py-1 mt-3  rounded-md cursor-pointer'
-                  onClick={(e) => navigate(`/blogs/${blog._id}`)}
+                  onClick={(e) => handleDelete(e, blog._id)}
                 >
                   Delete
                 </button>

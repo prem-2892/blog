@@ -14,6 +14,9 @@ import {
   BLOG_DELETE_REQUEST,
   BLOG_DELETE_SUCCESS,
   BLOG_DELETE_FAIL,
+  BLOG_EDIT_SUCCESS,
+  BLOG_EDIT_FAIL,
+  BLOG_EDIT_REQUEST,
 } from '../constants/blogConstants'
 import axios from 'axios'
 import { url } from '../../static/URL'
@@ -141,6 +144,75 @@ export const listUserBlogs = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: BLOG_USER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const deleteBlog = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: BLOG_DELETE_REQUEST,
+    })
+
+    const {
+      user: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    await axios.delete(`${url}/blogs/delete/${id}`, config)
+
+    dispatch({
+      type: BLOG_DELETE_SUCCESS,
+    })
+  } catch (error) {
+    dispatch({
+      type: BLOG_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const editBlog = (obj) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: BLOG_EDIT_REQUEST,
+    })
+
+    const {
+      user: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.put(
+      `${url}/blogs/update/${obj._id}`,
+      obj,
+      config
+    )
+
+    dispatch({
+      type: BLOG_EDIT_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: BLOG_EDIT_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
