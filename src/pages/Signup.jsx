@@ -1,15 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createUser } from '../redux/action/userAction'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
+  const [pswd, setPswd] = useState()
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const user = useSelector((state) => state.user)
+  const { userInfo } = user
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+    dispatch(createUser(username, email, pswd))
+    navigate('/')
+  }
+
   return (
     <div className='w-96 mx-auto mt-48'>
       <h3 className='font-medium text-xl my-4 text-center'>Sign Up</h3>
-      <form action='' className='p-4 flex flex-col items-start'>
+      <form
+        action=''
+        className='p-4 flex flex-col items-start'
+        onSubmit={(e) => submitHandler(e)}
+      >
         <div className='flex flex-col w-fit my-2 mx-auto gap-2'>
           <label htmlFor=''>Username</label>
           <input
             type='text'
             className='rounded-sm border border-black px-3 py-1'
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className='flex flex-col w-fit my-2 mx-auto gap-2'>
@@ -17,6 +42,7 @@ const Login = () => {
           <input
             type='email'
             className='rounded-sm border border-black px-3 py-1'
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className='flex flex-col w-fit my-2 mx-auto gap-2'>
@@ -24,6 +50,7 @@ const Login = () => {
           <input
             type='password'
             className='rounded-sm border border-black px-3 py-1'
+            onChange={(e) => setPswd(e.target.value)}
           />
         </div>
         <button className='bg-blue-300 px-4 py-2 w-fit mt-4 mx-auto rounded-md font-medium text-lg cursor-pointer'>

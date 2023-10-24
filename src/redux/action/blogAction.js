@@ -140,7 +140,7 @@ export const listUserBlogs = () => async (dispatch, getState) => {
     })
   } catch (error) {
     dispatch({
-      type: BLOG_USER_FAIl,
+      type: BLOG_USER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

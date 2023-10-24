@@ -23,7 +23,10 @@ const Home = () => {
     <div>
       {userInfo && (
         <div className='my-4 flex gap-3'>
-          <button className='bg-blue-300 px-3 py-1 rounded-md font-medium text-lg cursor-pointer'>
+          <button
+            className='bg-blue-300 px-3 py-1 rounded-md font-medium text-lg cursor-pointer'
+            onClick={(e) => navigate('/blogs/my')}
+          >
             My blogs
           </button>
           <button
