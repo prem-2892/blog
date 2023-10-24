@@ -19,7 +19,12 @@ const Navigation = () => {
 
   return (
     <div className='flex justify-between mt-4'>
-      <h3 className='font-bold text-2xl'>Blogs</h3>
+      <h3
+        className='font-bold text-2xl cursor-pointer'
+        onClick={(e) => navigate('/')}
+      >
+        Blogs
+      </h3>
       <div className='flex gap-3 text-lg'>
         {userInfo == null || userInfo == undefined ? (
           <>

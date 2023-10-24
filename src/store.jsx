@@ -3,11 +3,12 @@ import { createStore } from '@reduxjs/toolkit'
 import { composeWithDevTools } from '@redux-devtools/extension'
 import thunk from 'redux-thunk'
 import { userLoginReducer } from './redux/reducer/userReducers'
-import { blogListReducer } from './redux/reducer/blogReducer'
+import { blogItemReducer, blogListReducer } from './redux/reducer/blogReducer'
 
 const reducer = combineReducers({
   user: userLoginReducer,
   blogList: blogListReducer,
+  blogItem: blogItemReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
