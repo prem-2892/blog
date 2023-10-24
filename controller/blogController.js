@@ -29,8 +29,16 @@ const createBlog = asyncHandler(async (req, res) => {
 
 // Read Blog
 const getBlogById = asyncHandler(async (req, res) => {
-  const blog = await Blog.findById(req.params.id)
+  const blog = await Blog.findById(req.params.id).populate('author', 'username')
   res.json(blog)
+})
+
+const getBlogByUser = asyncHandler(async (req, res) => {
+  const blogs = await Blog.find({ author: req.user.id }).populate(
+    'author',
+    'username'
+  )
+  res.json(blogs)
 })
 
 // Update Blog
@@ -94,4 +102,11 @@ const getBlogs = asyncHandler(async (req, res) => {
   res.json(blogs)
 })
 
-export { createBlog, getBlogById, updateBlog, deleteBlog, getBlogs }
+export {
+  createBlog,
+  getBlogById,
+  updateBlog,
+  deleteBlog,
+  getBlogs,
+  getBlogByUser,
+}
